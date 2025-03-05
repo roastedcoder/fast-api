@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.database import engine, Base
 from app.routes import user
+from app.routes import item
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -9,6 +10,7 @@ app = FastAPI()
 
 # Register Routes
 app.include_router(user.router, prefix="/api", tags=["users"])
+app.include_router(item.router, prefix="/api", tags=["items"])
 
 @app.get("/")
 def read_root():

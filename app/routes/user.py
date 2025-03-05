@@ -4,7 +4,6 @@ from app.database import get_db
 from app.controllers import user as user_controller
 from app.schemas import user as user_schema
 from typing import List
-from app.models.user import User
 
 router = APIRouter()
 
@@ -21,4 +20,4 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.get("/users/", response_model=List[user_schema.UserResponse])
 def get_users(db: Session = Depends(get_db)):
-    return db.query(User).all()
+    return user_controller.get_users(db)
